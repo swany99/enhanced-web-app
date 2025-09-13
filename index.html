@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Engineer Job Write-up Summariser</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <h1>Engineer Job Write-up Summariser</h1>
+    <textarea id="inputText" rows="10" cols="80" placeholder="Paste engineer job write-up here..."></textarea><br/>
+    <button onclick="summariseText()">Summarise</button>
+    <button onclick="clearText()">Clear Text</button>
+    <h2>Summary</h2>
+    <div id="summaryOutput"></div>
+    <p id="charCount"></p>
+    <button id="downloadSummary" style="display:none;" onclick="downloadSummary()">Download Summary</button>
+    <div id="loadingSpinner" style="display:none;">Loading...</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
