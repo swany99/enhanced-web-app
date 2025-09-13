@@ -1,9 +1,45 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Enhanced Web App</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Engineer Job Write-up Summariser</title>
 </head>
 <body>
-    <h1>Welcome to the Enhanced Web App</h1>
-    <p>This is the previous version of the index.html file before the changes made in the specified commit.</p>
+<h1>Engineer Job Write-up Summariser</h1>
+<textarea id="inputText" rows="10" cols="80" placeholder="Paste engineer job write-up here..."></textarea><br/>
+<button onclick="summariseText()">Summarise</button>
+<h2>Summary</h2>
+<div id="summaryOutput"></div>
+<p id="charCount"></p>
+
+<script>
+async function summariseText() {
+  const input = document.getElementById("inputText").value;
+  if (!input.trim()) {
+    alert("Please enter the job write-up text.");
+    return;
+  }
+  const prompt = `Summarise the following engineering job write-up into three sections: Fault, Cause, Remedy. Output a total summary no longer than 1000 characters.\n\n${input}\n\nSummary:`;
+
+  // Call AI summarisation API (example with OpenAI)
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer YOUR_OPENAI_API_KEY"
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 250
+    })
+  });
+  const data = await response.json();
+  const summary = data.choices[0].message.content.trim();
+  document.getElementById("summaryOutput").innerText = summary;
+  document.getElementById("charCount").innerText = `Characters: ${summary.length}/1000`;
+}
+</script>
 </body>
 </html>
