@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SMT GB | Fault, Cause, Remedy Tool</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f7fa; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
     .images-top {
       display: flex;
       justify-content: center;
@@ -22,20 +29,8 @@
       border-radius: 10px;
     }
     .images-top img.logo {
-      order: 2;
       width: 180px;
       height: 120px;
-    }
-    .image-center {
-      display: flex;
-      justify-content: center;
-      margin: 0.5rem auto 1rem auto;
-    }
-    .image-center img {
-      width: 150px;
-      height: 100px;
-      object-fit: contain;
-      border-radius: 10px;
     }
     .container {
       max-width: 700px;
@@ -111,9 +106,6 @@
   <div class="images-top">
     <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/d98aa6a7-f80f-492a-9bf7-5830d4ebd8c5.png" alt="Mechanical engineer with PPE" />
     <img class="logo" src="IMG_1171.jpeg" alt="SMT GB Logo" />
-  </div>
-  
-  <div class="image-center">
     <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/f50db27c-370e-4428-a884-4a665bbf9ee0.png" alt="Spanner and Laptop" />
   </div>
 
@@ -136,13 +128,13 @@
       alert("Please enter the job write-up text.");
       return;
     }
-    const prompt = `Summarise the following engineering job write-up into three sections: Fault, Cause, Remedy. Total length: max 1000 characters.\n\n${input}\n\nSummary:`
+    const prompt = `Summarise the following engineering job write-up into three sections: Fault, Cause, Remedy. Total length: max 1000 characters.\n\n${input}\n\nSummary:`;
     try {
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "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"  // Replace with your real API key
+          "Authorization": "Bearer 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"
         },
         body: JSON.stringify({
           model: "gpt-4",
@@ -151,7 +143,7 @@
         })
       });
       const data = await response.json();
-      console.log(data); // For debugging
+      console.log(data);
       if (data.error) {
         alert(`API Error: ${data.error.message}`);
         return;
